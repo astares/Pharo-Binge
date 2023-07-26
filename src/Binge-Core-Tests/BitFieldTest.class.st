@@ -21,15 +21,35 @@ BitFieldTest >> testAsNumber [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testClearBit [
+BitFieldTest >> testDisableBit [
 
-	 self assert: (2r1111 asBitField clearBitAt: 2) printString equals: '1101'
+	self
+		assert: (2r1111 asBitField disableBitAt: 2) printString
+		equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testClearBits [
+BitFieldTest >> testDisableBits [
 
-	 self assert: (2r11111 asBitField clearBitsAt: #(1 3)) printString equals: '11010'
+	self
+		assert: (2r11111 asBitField disableBitsAt: #( 1 3 )) printString
+		equals: '11010'
+]
+
+{ #category : #'tests - bit manipulation' }
+BitFieldTest >> testEnableBit [
+
+	self
+		assert: (4 disabledBits enableBitAt: 2) printString
+		equals: '0010'
+]
+
+{ #category : #'tests - bit manipulation' }
+BitFieldTest >> testEnableBits [
+
+	self
+		assert: (5 disabledBits enableBitsAt: #( 1 3 )) printString
+		equals: '00101'
 ]
 
 { #category : #'tests - comparision' }
@@ -125,18 +145,6 @@ BitFieldTest >> testNumberOfBytesRequired [
 		assert: 8 disabledBits numberOfBytesRequired equals: 1;
 		assert: 9 disabledBits numberOfBytesRequired equals: 2;
 		assert: 32 disabledBits numberOfBytesRequired equals: 4
-]
-
-{ #category : #'tests - bit manipulation' }
-BitFieldTest >> testSetBit [
-
-	 self assert: (4 disabledBits setBitAt: 2) printString equals: '0010'
-]
-
-{ #category : #'tests - bit manipulation' }
-BitFieldTest >> testSetBits [
-
-	self assert: (5 disabledBits setBitsAt: #( 1 3 )) printString equals: '00101'
 ]
 
 { #category : #'tests - bit manipulation' }

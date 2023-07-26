@@ -115,16 +115,31 @@ BitField >> bitsValue: aValue [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> clearBitAt: index [
+BitField >> disableBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
    (self getBitAt: index) = 0 ifFalse: [ self toggleBitAt: index ]
 ]
 
 { #category : #'bit manipulation' }
-BitField >> clearBitsAt: aCollectionOfIndices [
+BitField >> disableBitsAt: aCollectionOfIndices [
 
-	aCollectionOfIndices do: [ :each | self clearBitAt: each ].
+	aCollectionOfIndices do: [ :each | self disableBitAt: each ].
+	^ self
+]
+
+{ #category : #'bit manipulation' }
+BitField >> enableBitAt: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [
+		^ self error: 'Invalid bit index' ].
+	bitsValue := bitsValue bitOr: 1 << (index - 1)
+]
+
+{ #category : #'bit manipulation' }
+BitField >> enableBitsAt: aCollectionOfIndices [
+
+	aCollectionOfIndices do: [ :each | self enableBitAt: each ].
 	^ self
 ]
 
@@ -153,12 +168,6 @@ BitField >> initialize [
 
 	super initialize.
 	self initialBitsValue: 0
-]
-
-{ #category : #operating }
-BitField >> invert [
-
-	1 to: numberOfBits do: [ :index | self toggleBitAt: index ]
 ]
 
 { #category : #testing }
@@ -198,19 +207,10 @@ BitField >> readStream [
 	^ self printString readStream
 ]
 
-{ #category : #'bit manipulation' }
-BitField >> setBitAt: index [
+{ #category : #operating }
+BitField >> toggleAllBits [
 
-	(index between: 1 and: numberOfBits) ifFalse: [
-		^ self error: 'Invalid bit index' ].
-	bitsValue := bitsValue bitOr: 1 << (index - 1)
-]
-
-{ #category : #'bit manipulation' }
-BitField >> setBitsAt: aCollectionOfIndices [
-
-	aCollectionOfIndices do: [ :each | self setBitAt: each ].
-	^ self
+	1 to: numberOfBits do: [ :index | self toggleBitAt: index ]
 ]
 
 { #category : #'bit manipulation' }

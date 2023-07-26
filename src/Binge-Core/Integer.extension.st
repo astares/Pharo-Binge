@@ -33,7 +33,7 @@ Integer >> disabledBits [
 { #category : #'*Binge-Core' }
 Integer >> enabledBits [
 
-	^ self disabledBits invert
+	^ self disabledBits toggleAllBits
 ]
 
 { #category : #'*Binge-Core' }
