@@ -53,15 +53,29 @@ BitTest >> testInstanceCreationWithInvalidValues [
 { #category : #'tests - testing' }
 BitTest >> testIsDisabled [
 
-	self assert: (Bit value: 0) isDisabled.
-	self deny: (Bit value: 0) isEnabled
+	self assert: Bit disabled isDisabled.
+	self deny: Bit disabled isEnabled
 ]
 
 { #category : #'tests - testing' }
 BitTest >> testIsEnabled [
 
-	self assert: (Bit value: 1) isEnabled.
-	self deny: (Bit value: 1) isDisabled
+	self assert: Bit enabled isEnabled.
+	self deny: Bit enabled isDisabled
+]
+
+{ #category : #'tests - testing' }
+BitTest >> testIsNotDisabled [
+
+	self assert: Bit enabled isNotDisabled.
+	self deny: Bit enabled isNotEnabled
+]
+
+{ #category : #'tests - testing' }
+BitTest >> testIsNotEnabled [
+
+	self assert: Bit disabled isNotEnabled.
+	self deny: Bit disabled isNotDisabled
 ]
 
 { #category : #'tests - accessing' }
