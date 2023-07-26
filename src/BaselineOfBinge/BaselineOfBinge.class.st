@@ -23,6 +23,7 @@ BaselineOfBinge >> baseline: spec [
 				group: 'Core' with: #('Binge-Core');
 				group: 'Tests' with: #('Binge-Core-Tests');
 				group: 'Tools' with: #('Binge-Pharo');
+				group: 'CI' with: #('Tests');
 				group: 'all' with: #('Core' 'Tests' 'Tools');
 				group: 'default' with: #('all')
 	]
