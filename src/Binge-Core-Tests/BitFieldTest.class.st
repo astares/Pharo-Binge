@@ -57,16 +57,26 @@ BitFieldTest >> testInitialPrintString [
 	self assert: 2 bits printString equals: '00'
 ]
 
-{ #category : #tests }
+{ #category : #'tests - instance creation' }
 BitFieldTest >> testInstanceCreationFromInteger [
 
 	self assert: 32 bits isBitField
 ]
 
-{ #category : #tests }
+{ #category : #'tests - instance creation' }
 BitFieldTest >> testInstanceCreationFromNegativeIntegerShouldFail [
 
 	self should: [ -2 bits ] raise: Error
+]
+
+{ #category : #'tests - instance creation' }
+BitFieldTest >> testInstanceCreationFromString [
+
+	| bitField |
+	bitField := (BitField fromString: '11001').
+
+	self assert: (bitField isKindOf: BitField).
+	self assert: bitField printString equals: '11001'
 ]
 
 { #category : #'tests - extensions' }
@@ -86,6 +96,15 @@ BitFieldTest >> testNextPowerOfTwo [
 		assert: 17 nextPowerOfTwo equals: 32;
 		assert: 32 nextPowerOfTwo equals: 32;
 		assert: 33 nextPowerOfTwo equals: 64
+]
+
+{ #category : #'tests - accessing' }
+BitFieldTest >> testNumberOfBits [
+
+	self
+		assert: 0 bits numberOfBits equals: 0;
+		assert: 4 bits numberOfBits equals: 4;
+		assert: 42 bits numberOfBits equals: 42
 ]
 
 { #category : #'tests - accessing' }

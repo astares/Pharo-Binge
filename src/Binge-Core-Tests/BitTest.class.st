@@ -29,3 +29,33 @@ BitTest >> testInstanceCreationFromInteger [
 		assert: 64 asBit position equals: 7;
 		assert: 128 asBit position equals: 8
 ]
+
+{ #category : #'tests - instance creation' }
+BitTest >> testInstanceCreationWithInvalidValues [
+
+	self should: [ Bit value: 3 ] raise: Error
+]
+
+{ #category : #'tests - operating' }
+BitTest >> testSet [
+
+	self assert: 64 asBit set isSet
+]
+
+{ #category : #'tests - accessing' }
+BitTest >> testSetInvalidValue [
+
+	self should: [ 1 bit value: 3 ] raise: Error
+]
+
+{ #category : #'tests - operating' }
+BitTest >> testToggle [
+
+	self assert: 64 asBit toggle isSet
+]
+
+{ #category : #'tests - operating' }
+BitTest >> testUnset [
+
+	self assert: 64 asBit toggle unset isNotSet
+]

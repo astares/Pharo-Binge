@@ -4,7 +4,7 @@ An APBinaryStreamReaderTest is a test class for testing the behavior of APBinary
 Class {
 	#name : #BinaryStreamReaderTest,
 	#superclass : #TestCase,
-	#category : #'Binge-Core-Tests-Base'
+	#category : #'Binge-Core-Tests-Reading'
 }
 
 { #category : #utilities }

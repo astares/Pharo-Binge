@@ -15,8 +15,23 @@ Class {
 BitField class >> fromInteger: anInteger [
 
 	^ (self length: (anInteger printStringRadix: 2) size - 2)
-			bitsValue: anInteger;
+			initialBitsValue: anInteger;
 			yourself
+]
+
+{ #category : #'instance creation' }
+BitField class >> fromString: aString [
+
+	| instance end |
+	end := aString size.
+	instance := self length: aString size.
+	aString withIndexDo: [ :each :index |
+		each = $1
+			ifTrue: [ instance toggleBit: end + 1 - index ]
+			ifFalse: [
+			each = $0 ifFalse: [ self error: 'String is not in bit format' ] ] ].
+
+	^ instance
 ]
 
 { #category : #'instance creation' }
@@ -51,7 +66,11 @@ BitField >> asNumber [
 ]
 
 { #category : #'bit access' }
-BitField >> bitAt: aPosition [
+BitField >> bitAt: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [
+		^ self error: 'Invalid bit index' ].
+	^ (bitsValue bitShift: 1 - index) bitAnd: 1
 ]
 
 { #category : #'private - accessing' }
@@ -94,11 +113,17 @@ BitField >> hash [
 	^ bitsValue hash bitXor: numberOfBits hash
 ]
 
+{ #category : #'private - initalization' }
+BitField >> initialBitsValue: initialValue [
+
+	bitsValue := initialValue
+]
+
 { #category : #initialization }
 BitField >> initialize [
 
 	super initialize.
-	bitsValue := 0
+	self initialBitsValue: 0
 ]
 
 { #category : #operating }
@@ -127,6 +152,7 @@ BitField >> numberOfBits: anInteger [
 
 { #category : #accessing }
 BitField >> numberOfBytesRequired [
+	"Return the number of bytes required to represent the receiver"
 
 	^ self class numberOfBytesRequiredForBits: self numberOfBits
 ]
