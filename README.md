@@ -79,7 +79,17 @@ creates a simple matrix
 0000
 0000
 ```
-
+#### Bit manipulation
+Similar to bit fields you can also manipulate the bits within a bit matrix. Use a point to address the right position:
+```Smalltalk
+(BitMatrix ofSize: 3@4) enableBitAt: 2@1 
+```
+outputs the manipulated matrix
+```
+010
+000
+000
+000```
 
 
 
