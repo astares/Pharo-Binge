@@ -64,7 +64,7 @@ You can also manipulate several bit positions at the same time:
 #### Querying bits
 If you want to know the value at a specific position use *#getBitAt:* method:
 ```Smalltalk
-2r1000 asBitField getBitAt: 4   "Returns the bit value at the 4th position from right, which is 1"
+2r1000 asBitField bitAt: 4   "Returns the bit value at the 4th position from right, which is 1"
 ```
 
 ### BitMatrix
