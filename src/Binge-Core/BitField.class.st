@@ -27,7 +27,7 @@ BitField class >> fromString: aString [
 	instance := self length: aString size.
 	aString withIndexDo: [ :each :index |
 		each = $1
-			ifTrue: [ instance toggleBit: end + 1 - index ]
+			ifTrue: [ instance toggleBitAt: end + 1 - index ]
 			ifFalse: [
 			each = $0 ifFalse: [ self error: 'String is not in bit format' ] ] ].
 
@@ -115,21 +115,21 @@ BitField >> bitsValue: aValue [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> clearBit: index [
+BitField >> clearBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
-   (self getBit: index) = 0 ifFalse: [ self toggleBit: index ]
+   (self getBitAt: index) = 0 ifFalse: [ self toggleBitAt: index ]
 ]
 
 { #category : #'bit manipulation' }
-BitField >> clearBits: aCollectionOfIndices [
+BitField >> clearBitsAt: aCollectionOfIndices [
 
-	aCollectionOfIndices do: [ :each | self clearBit: each ].
+	aCollectionOfIndices do: [ :each | self clearBitAt: each ].
 	^ self
 ]
 
 { #category : #'bit access' }
-BitField >> getBit: index [
+BitField >> getBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [
 		^ self error: 'Invalid bit index' ].
@@ -158,7 +158,7 @@ BitField >> initialize [
 { #category : #operating }
 BitField >> invert [
 
-	1 to: numberOfBits do: [ :index | self toggleBit: index ]
+	1 to: numberOfBits do: [ :index | self toggleBitAt: index ]
 ]
 
 { #category : #testing }
@@ -199,7 +199,7 @@ BitField >> readStream [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> setBit: index [
+BitField >> setBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [
 		^ self error: 'Invalid bit index' ].
@@ -207,14 +207,14 @@ BitField >> setBit: index [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> setBits: aCollectionOfIndices [
+BitField >> setBitsAt: aCollectionOfIndices [
 
-	aCollectionOfIndices do: [ :each | self setBit: each ].
+	aCollectionOfIndices do: [ :each | self setBitAt: each ].
 	^ self
 ]
 
 { #category : #'bit manipulation' }
-BitField >> toggleBit: index [
+BitField >> toggleBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [
 		^ self error: 'Invalid bit index' ].
@@ -222,9 +222,9 @@ BitField >> toggleBit: index [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> toggleBits: aCollectionOfIndices [
+BitField >> toggleBitsAt: aCollectionOfIndices [
 
-	aCollectionOfIndices do: [ :each | self toggleBit: each ].
+	aCollectionOfIndices do: [ :each | self toggleBitAt: each ].
 	^ self
 ]
 

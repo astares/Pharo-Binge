@@ -23,13 +23,13 @@ BitFieldTest >> testAsNumber [
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testClearBit [
 
-	 self assert: (2r1111 asBitField clearBit: 2) printString equals: '1101'
+	 self assert: (2r1111 asBitField clearBitAt: 2) printString equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testClearBits [
 
-	 self assert: (2r11111 asBitField clearBits: #(1 3)) printString equals: '11010'
+	 self assert: (2r11111 asBitField clearBitsAt: #(1 3)) printString equals: '11010'
 ]
 
 { #category : #'tests - comparision' }
@@ -130,23 +130,23 @@ BitFieldTest >> testNumberOfBytesRequired [
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testSetBit [
 
-	 self assert: (4 disabledBits setBit: 2) printString equals: '0010'
+	 self assert: (4 disabledBits setBitAt: 2) printString equals: '0010'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testSetBits [
 
-	self assert: (5 disabledBits setBits: #( 1 3 )) printString equals: '00101'
+	self assert: (5 disabledBits setBitsAt: #( 1 3 )) printString equals: '00101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBit [
 
-	self assert: (2r1111 asBitField toggleBit: 2) printString equals: '1101'
+	self assert: (2r1111 asBitField toggleBitAt: 2) printString equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBits [
 
-	self assert: (2r11111111 asBitField toggleBits: #(1 2 7)) printString equals: '10111100'
+	self assert: (2r11111111 asBitField toggleBitsAt: #(1 2 7)) printString equals: '10111100'
 ]
