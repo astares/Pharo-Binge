@@ -118,7 +118,7 @@ BitField >> bitsValue: aValue [
 BitField >> disableBitAt: index [
 
 	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
-   (self getBitAt: index) = 0 ifFalse: [ self toggleBitAt: index ]
+   (self bitAt: index) = 0 ifFalse: [ self toggleBitAt: index ]
 ]
 
 { #category : #'bit manipulation' }
@@ -141,14 +141,6 @@ BitField >> enableBitsAt: aCollectionOfIndices [
 
 	aCollectionOfIndices do: [ :each | self enableBitAt: each ].
 	^ self
-]
-
-{ #category : #'bit access' }
-BitField >> getBitAt: index [
-
-	(index between: 1 and: numberOfBits) ifFalse: [
-		^ self error: 'Invalid bit index' ].
-	^ (bitsValue bitShift: 1 - index) bitAnd: 1
 ]
 
 { #category : #comparing }

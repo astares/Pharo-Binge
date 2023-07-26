@@ -79,6 +79,13 @@ BitTest >> testIsNotEnabled [
 ]
 
 { #category : #'tests - accessing' }
+BitTest >> testPosition [
+
+	self assert: Bit enabled position equals: 0.
+	self assert: Bit disabled position equals: 0
+]
+
+{ #category : #'tests - accessing' }
 BitTest >> testSetInvalidValue [
 
 	self should: [ 1 bit value: 3 ] raise: Error
@@ -89,4 +96,11 @@ BitTest >> testToggle [
 
 	self assert: Bit disabled toggle isEnabled.
 	self assert: Bit enabled toggle isDisabled
+]
+
+{ #category : #'tests - accessing' }
+BitTest >> testValue [
+
+	self assert: Bit enabled value equals: 1.
+	self assert: Bit disabled value equals: 0
 ]

@@ -20,6 +20,12 @@ BitFieldTest >> testAsNumber [
 	self assert: 42 asBitField asNumber equals: 42
 ]
 
+{ #category : #'tests - accessing' }
+BitFieldTest >> testBitsValue [
+
+	self assert: 42 asBitField bitsValue equals: 42
+]
+
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testDisableBitAt [
 
@@ -108,6 +114,14 @@ BitFieldTest >> testInstanceCreationFromString [
 
 	self assert: (bitField isKindOf: BitField).
 	self assert: bitField printString equals: '11001'
+]
+
+{ #category : #'tests - testing' }
+BitFieldTest >> testIsBitField [
+
+	self deny: 1 isBitField.
+
+	self assert: 1 enabledBits isBitField
 ]
 
 { #category : #'tests - extensions' }

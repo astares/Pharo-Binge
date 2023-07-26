@@ -110,25 +110,11 @@ Bit >> position: anObject [
 ]
 
 { #category : #operating }
-Bit >> set [
-	"Sets the bit"
-
-	value := 1
-]
-
-{ #category : #operating }
 Bit >> toggle [
 
 	value := value = 0
 		         ifTrue: [ 1 ]
 		         ifFalse: [ 0 ]
-]
-
-{ #category : #operating }
-Bit >> unset [
-	"Unset the bit"
-
-	value := 0
 ]
 
 { #category : #evaluating }
