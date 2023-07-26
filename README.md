@@ -45,10 +45,13 @@ Once you have a bit field you can start to manipulate it. As Smalltalk allows to
 ```Smalltalk
 2r1111 asBitField toggleBitAt: 2  "Toogles the bit on the 2nd position from right, so the bit field 1111 becomes 1101"
 ```
-You can also explicitly manipulate a bit at a specific position:
+You can also explicitly manipulate a bit at a specific position by enabling or disabling it:
 ```Smalltalk
-128 asBitField setBitAt: 4   "Switches the bit on the 4th position from right, so the bit field 10000000 becomes 10001000"
+128 asBitField enableBitAt: 4   "Switches the bit on the 4th position from right, so the bit field 10000000 becomes 10001000"
+
+128 asBitField disableBitAt: 8   "Switches the bit on the 4th position from right, so the bit field 10000000 becomes 00000000"
 ```
+
 If you want to know the value at a specific position use *#getBitAt:* method:
 ```Smalltalk
 2r1000 asBitField getBitAt: 4   "Returns the bit value at the 4th position from right, which is 1"
