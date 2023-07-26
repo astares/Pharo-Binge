@@ -53,6 +53,7 @@ If you want to know the value at a specific position use *#getBitAt:* method:
 ```Smalltalk
 2r1000 asBitField getBitAt: 4   "Returns the bit value at the 4th position from right, which is 1"
 ```
+
 ### BitMatrix
 #### Creating bit matrix
 A bit matrix is basically a matrix with bits at each position. Internally all the rows are bit fields. 
