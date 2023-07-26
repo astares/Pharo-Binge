@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #'tests - operating' }
+BitMatrixTest >> testBitAt [
+
+	| point matrix |
+	point := 2@1.
+	matrix := (BitMatrix ofSize: 3@4) enableBitAt: point.
+	self assert: (matrix bitAt: point) equals: 1
+]
+
+{ #category : #'tests - operating' }
 BitMatrixTest >> testEnableBitAt [
 
 	self assert: ((BitMatrix ofSize: 3@4) enableBitAt: 2@1) printString equals: '010

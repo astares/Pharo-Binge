@@ -37,6 +37,12 @@ BitMatrix >> at: aRowIndex [
 	^ self rows at: aRowIndex
 ]
 
+{ #category : #accessing }
+BitMatrix >> bitAt: aPoint [
+
+	^(self rows at: aPoint y) bitAt: aPoint x
+]
+
 { #category : #operating }
 BitMatrix >> disableBitAt: aPoint [
 
