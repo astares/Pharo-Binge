@@ -16,6 +16,12 @@ BitMatrixTest >> testBitAt [
 	self assert: (matrix bitAt: point) equals: 1
 ]
 
+{ #category : #'tests - instance creation' }
+BitMatrixTest >> testCreationWithoutSizeShouldThrowError [
+
+	self should: [ BitMatrix ofSize: 0@0 ] raise: Error
+]
+
 { #category : #'tests - operating' }
 BitMatrixTest >> testEnableBitAt [
 

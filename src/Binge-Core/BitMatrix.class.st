@@ -13,10 +13,10 @@ Class {
 { #category : #'instance creation' }
 BitMatrix class >> fromBitFields: aCollectionOfBitFields [
 
-	aCollectionOfBitFields ifEmpty: [ ^ nil ].
+	aCollectionOfBitFields ifEmpty: [ self error: 'Empty matrix is not useful' ].
 	(aCollectionOfBitFields allSatisfy: [:row | row numberOfBits == aCollectionOfBitFields first numberOfBits ])
 			ifFalse: [ self error: 'All rows must be of same size' ].
-	
+
 	^ (self new)
 			rows: aCollectionOfBitFields;
 			yourself
