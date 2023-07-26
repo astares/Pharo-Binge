@@ -21,7 +21,7 @@ BitFieldTest >> testAsNumber [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testDisableBit [
+BitFieldTest >> testDisableBitAt [
 
 	self
 		assert: (2r1111 asBitField disableBitAt: 2) printString
@@ -29,7 +29,7 @@ BitFieldTest >> testDisableBit [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testDisableBits [
+BitFieldTest >> testDisableBitsAt [
 
 	self
 		assert: (2r11111 asBitField disableBitsAt: #( 1 3 )) printString
@@ -37,7 +37,7 @@ BitFieldTest >> testDisableBits [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testEnableBit [
+BitFieldTest >> testEnableBitAt [
 
 	self
 		assert: (4 disabledBits enableBitAt: 2) printString
@@ -45,7 +45,7 @@ BitFieldTest >> testEnableBit [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testEnableBits [
+BitFieldTest >> testEnableBitsAt [
 
 	self
 		assert: (5 disabledBits enableBitsAt: #( 1 3 )) printString
@@ -154,13 +154,13 @@ BitFieldTest >> testToggleAllBits [
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testToggleBit [
+BitFieldTest >> testToggleBitAt [
 
 	self assert: (2r1111 asBitField toggleBitAt: 2) printString equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
-BitFieldTest >> testToggleBits [
+BitFieldTest >> testToggleBitsAt [
 
 	self assert: (2r11111111 asBitField toggleBitsAt: #(1 2 7)) printString equals: '10111100'
 ]

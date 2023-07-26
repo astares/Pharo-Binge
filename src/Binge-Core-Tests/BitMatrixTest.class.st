@@ -7,6 +7,15 @@ Class {
 	#category : #'Binge-Core-Tests-Base'
 }
 
+{ #category : #'tests - operating' }
+BitMatrixTest >> testEnableBitAt [
+
+	self assert: ((BitMatrix ofSize: 3@4) enableBitAt: 2@1) printString equals: '010
+000
+000
+000'
+]
+
 { #category : #'tests - printing' }
 BitMatrixTest >> testPrinting [
 
@@ -16,4 +25,15 @@ BitMatrixTest >> testPrinting [
 	self assert: (BitMatrix ofSize: 4@3) printString equals: '0000
 0000
 0000'
+]
+
+{ #category : #'tests - bit manipulation' }
+BitMatrixTest >> testToggleAllBits [
+
+	| matrix |
+	matrix := (BitMatrix ofSize: 3 @ 4) enableBitAt: 2 @ 1.
+	self assert: matrix toggleAllBits printString equals: '101
+111
+111
+111'
 ]

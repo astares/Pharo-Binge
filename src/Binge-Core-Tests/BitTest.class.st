@@ -7,6 +7,20 @@ Class {
 	#category : #'Binge-Core-Tests-Base'
 }
 
+{ #category : #'tests - operating' }
+BitTest >> testDisable [
+
+	self assert: Bit enabled disable isDisabled.
+	self assert: Bit enabled disable isNotEnabled
+]
+
+{ #category : #'tests - operating' }
+BitTest >> testEnable [
+
+	self assert: Bit disabled enable isEnabled.
+	self assert: Bit disabled enable isNotDisabled
+]
+
 { #category : #tests }
 BitTest >> testInstanceCreation [
 
@@ -36,10 +50,18 @@ BitTest >> testInstanceCreationWithInvalidValues [
 	self should: [ Bit value: 3 ] raise: Error
 ]
 
-{ #category : #'tests - operating' }
-BitTest >> testSet [
+{ #category : #'tests - testing' }
+BitTest >> testIsDisabled [
 
-	self assert: 64 asBit set isSet
+	self assert: (Bit value: 0) isDisabled.
+	self deny: (Bit value: 0) isEnabled
+]
+
+{ #category : #'tests - testing' }
+BitTest >> testIsEnabled [
+
+	self assert: (Bit value: 1) isEnabled.
+	self deny: (Bit value: 1) isDisabled
 ]
 
 { #category : #'tests - accessing' }
@@ -51,11 +73,6 @@ BitTest >> testSetInvalidValue [
 { #category : #'tests - operating' }
 BitTest >> testToggle [
 
-	self assert: 64 asBit toggle isSet
-]
-
-{ #category : #'tests - operating' }
-BitTest >> testUnset [
-
-	self assert: 64 asBit toggle unset isNotSet
+	self assert: Bit disabled toggle isEnabled.
+	self assert: Bit enabled toggle isDisabled
 ]

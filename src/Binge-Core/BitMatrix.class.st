@@ -37,6 +37,18 @@ BitMatrix >> at: aRowIndex [
 	^ self rows at: aRowIndex
 ]
 
+{ #category : #operating }
+BitMatrix >> disableBitAt: aPoint [
+
+	(self rows at: aPoint y) disableBitAt: aPoint x
+]
+
+{ #category : #operating }
+BitMatrix >> enableBitAt: aPoint [
+
+	(self rows at: aPoint y) enableBitAt: aPoint x
+]
+
 { #category : #printing }
 BitMatrix >> printOn: aStream [
 
@@ -55,4 +67,10 @@ BitMatrix >> rows [
 BitMatrix >> rows: anObject [
 
 	rows := anObject
+]
+
+{ #category : #operating }
+BitMatrix >> toggleAllBits [
+
+	self rows do: [:each | each toggleAllBits ]
 ]

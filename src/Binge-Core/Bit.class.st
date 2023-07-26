@@ -19,6 +19,18 @@ Bit class >> checkValue: aValue [
 ]
 
 { #category : #'instance creation' }
+Bit class >> disabled [
+
+	^ self value: 0
+]
+
+{ #category : #'instance creation' }
+Bit class >> enabled [
+
+	^ self value: 1
+]
+
+{ #category : #'instance creation' }
 Bit class >> value: aValue [
 
 	^ (self new)
@@ -35,6 +47,20 @@ Bit class >> value: aValue atPosition: aPosition [
 			yourself
 ]
 
+{ #category : #operating }
+Bit >> disable [
+	"Disable the bit by setting to 0"
+
+	value := 0
+]
+
+{ #category : #operating }
+Bit >> enable [
+	"Enable the bit by setting to 1"
+
+	value := 1
+]
+
 { #category : #initialization }
 Bit >> initialize [
 
@@ -44,15 +70,31 @@ Bit >> initialize [
 ]
 
 { #category : #testing }
-Bit >> isNotSet [
+Bit >> isDisabled [
+	"Return true if the bit is disabled, false otherwise."
 
-	^ self isSet not
+	^ self isEnabled not
 ]
 
 { #category : #testing }
-Bit >> isSet [
+Bit >> isEnabled [
+	"Return true if the bit is enabled, false otherwise."
 
 	^ value = 1
+]
+
+{ #category : #testing }
+Bit >> isNotDisabled [
+	"Return true if the bit is not disabled, false otherwise."
+
+	^ self isDisabled not
+]
+
+{ #category : #testing }
+Bit >> isNotEnabled [
+	"Return true if the bit is not enabled, false otherwise."
+
+	^ self isEnabled not
 ]
 
 { #category : #accessing }
