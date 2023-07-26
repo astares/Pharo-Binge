@@ -45,6 +45,11 @@ Once you have a bit field you can start to manipulate it. As Smalltalk allows to
 ```Smalltalk
 2r1111 asBitField toggleBitAt: 2  "Toogles the bit on the 2nd position from right, so the bit field 1111 becomes 1101"
 ```
+If you like you can toggle all bits in one pass:
+```Smalltalk
+269 asBitField toggleAllBits.
+```
+
 You can also explicitly manipulate a bit at a specific position by enabling or disabling it:
 ```Smalltalk
 128 asBitField enableBitAt: 4   "Switches the bit on the 4th position from right, so the bit field 10000000 becomes 10001000"
