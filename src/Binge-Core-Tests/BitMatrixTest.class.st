@@ -23,6 +23,15 @@ BitMatrixTest >> testCreationWithoutSizeShouldThrowError [
 ]
 
 { #category : #'tests - operating' }
+BitMatrixTest >> testDisableBitAt [
+
+	self assert: ((BitMatrix ofSize: 3@4) toggleAllBits disableBitAt: 2@1) printString equals: '101
+111
+111
+111'
+]
+
+{ #category : #'tests - operating' }
 BitMatrixTest >> testEnableBitAt [
 
 	self assert: ((BitMatrix ofSize: 3@4) enableBitAt: 2@1) printString equals: '010
@@ -51,4 +60,13 @@ BitMatrixTest >> testToggleAllBits [
 111
 111
 111'
+]
+
+{ #category : #'tests - operating' }
+BitMatrixTest >> testToggleBitAt [
+
+	self assert: ((BitMatrix ofSize: 3@4) toggleBitAt: 2@1) printString equals: '010
+000
+000
+000'
 ]

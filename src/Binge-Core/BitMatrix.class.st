@@ -80,3 +80,9 @@ BitMatrix >> toggleAllBits [
 
 	self rows do: [:each | each toggleAllBits ]
 ]
+
+{ #category : #operating }
+BitMatrix >> toggleBitAt: aPoint [
+
+	(self rows at: aPoint y) toggleBitAt: aPoint x
+]
