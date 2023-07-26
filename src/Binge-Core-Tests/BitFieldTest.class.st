@@ -148,6 +148,12 @@ BitFieldTest >> testNumberOfBytesRequired [
 ]
 
 { #category : #'tests - bit manipulation' }
+BitFieldTest >> testToggleAllBits [
+
+	self assert: (2r1111 asBitField toggleAllBits) printString equals: '0000'
+]
+
+{ #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBit [
 
 	self assert: (2r1111 asBitField toggleBitAt: 2) printString equals: '1101'
