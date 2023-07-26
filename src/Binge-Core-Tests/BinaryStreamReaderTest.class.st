@@ -53,6 +53,14 @@ BinaryStreamReaderTest >> testBigEndianReadingWith5Bytes [
 	self assert: (instance readBigEndianInteger: 5) equals: 16r4F52DCEF15
 ]
 
+{ #category : #'tests - instance creation' }
+BinaryStreamReaderTest >> testInstanceCreationFromStream [
+
+	|stream|
+	stream := String new readStream.
+	self assert: (BinaryStreamReader on: stream) stream identicalTo: stream
+]
+
 { #category : #'tests - little endian' }
 BinaryStreamReaderTest >> testLittleEndianReadingWith1Byte [
 
@@ -91,4 +99,20 @@ BinaryStreamReaderTest >> testLittleEndianReadingWith5Bytes [
 	| instance |
 	instance := self readerFor: #(16r15 16rEF 16rDC 16r52 16r4F) readStream.
 	self assert: (instance readLittleEndianInteger: 5) equals: 16r4F52DCEF15
+]
+
+{ #category : #'tests - big endian' }
+BinaryStreamReaderTest >> testReadBigEndianInteger [
+
+	| instance |
+	instance := self readerFor: #(16r52 16r4F) readStream.
+	self assert: (instance readBigEndianInteger: 2) equals: 16r524F
+]
+
+{ #category : #'tests - little endian' }
+BinaryStreamReaderTest >> testReadLittleEndianInteger [
+
+	| instance |
+	instance := self readerFor: #(16r4F 16r52) readStream.
+	self assert: (instance readLittleEndianInteger: 2) equals: 16r524F
 ]
