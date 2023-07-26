@@ -52,6 +52,11 @@ You can also explicitly manipulate a bit at a specific position by enabling or d
 128 asBitField disableBitAt: 8   "Switches the bit on the 4th position from right, so the bit field 10000000 becomes 00000000"
 ```
 
+You can also manipulate several bit positions at the same time:
+```Smalltalk
+8 disabledBits enableBitsAt: #(1 3) "Returns 00000101 where the bits on the first and 3rd position are enabled"
+```
+#### Querying bits
 If you want to know the value at a specific position use *#getBitAt:* method:
 ```Smalltalk
 2r1000 asBitField getBitAt: 4   "Returns the bit value at the 4th position from right, which is 1"
