@@ -196,7 +196,7 @@ BitField >> printOn: aStream [
 { #category : #converting }
 BitField >> readStream [
 
-	^ self printString readStream
+	^ (self printString inject: OrderedCollection new into: [:coll :each | coll add: each asString asNumber. coll ]) readStream
 ]
 
 { #category : #operating }

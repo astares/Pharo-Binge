@@ -21,6 +21,18 @@ BitFieldTest >> testAsNumber [
 ]
 
 { #category : #'tests - accessing' }
+BitFieldTest >> testBitAt [
+
+	self assert: (4 asBitField bitAt: 3) equals: 1
+]
+
+{ #category : #'tests - accessing' }
+BitFieldTest >> testBits [
+
+	self assert: (4 disabledBits bits allSatisfy: [:each | each isDisabled ])
+]
+
+{ #category : #'tests - accessing' }
 BitFieldTest >> testBitsValue [
 
 	self assert: 42 asBitField bitsValue equals: 42
@@ -67,7 +79,7 @@ BitFieldTest >> testEqual [
 ]
 
 { #category : #'tests - comparision' }
-BitFieldTest >> testHashing [
+BitFieldTest >> testHash [
 
 	self assert: 15 asBitField hash equals: 15 asBitField hash
 ]
@@ -159,6 +171,17 @@ BitFieldTest >> testNumberOfBytesRequired [
 		assert: 8 disabledBits numberOfBytesRequired equals: 1;
 		assert: 9 disabledBits numberOfBytesRequired equals: 2;
 		assert: 32 disabledBits numberOfBytesRequired equals: 4
+]
+
+{ #category : #'tests - conversion' }
+BitFieldTest >> testReadStream [
+
+	| stream |
+	stream := 4 asBitField readStream.
+	self
+		assert: stream next equals: 1;
+		assert: stream next equals: 0;
+		assert: stream next equals: 0
 ]
 
 { #category : #'tests - bit manipulation' }
