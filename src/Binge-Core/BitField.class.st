@@ -27,6 +27,15 @@ BitField class >> length: bitLength [
 			yourself
 ]
 
+{ #category : #utilities }
+BitField class >> numberOfBytesRequiredForBits: numberOfBits [
+	"Return the number of bits required to store the given number of bits"
+
+	| numberOfBytes |
+	numberOfBytes := (numberOfBits / 8) roundUpTo: 1.
+	^ numberOfBytes
+]
+
 { #category : #comparing }
 BitField >> = anotherBitfield [
 
@@ -38,10 +47,10 @@ BitField >> = anotherBitfield [
 { #category : #converting }
 BitField >> asNumber [
 
-	^ bitsValue
+	^ self bitsValue
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 BitField >> bitsValue [
 
 	^ bitsValue
@@ -66,6 +75,14 @@ BitField >> initialize [
 	bitsValue := 0
 ]
 
+{ #category : #operating }
+BitField >> invert [
+
+	1 to: numberOfBits do: [:index |
+		self toggleBit: index
+		]
+]
+
 { #category : #testing }
 BitField >> isBitField [
 
@@ -84,8 +101,39 @@ BitField >> numberOfBits: anInteger [
 	numberOfBits := anInteger
 ]
 
+{ #category : #accessing }
+BitField >> numberOfBytesRequired [
+
+	^ self class numberOfBytesRequiredForBits: self numberOfBits
+]
+
 { #category : #printing }
 BitField >> printOn: aStream [
 
 	aStream nextPutAll: (bitsValue printPaddedWith: $0 to: numberOfBits base: 2)
+]
+
+{ #category : #'bit manipulation' }
+BitField >> setBit: index [ 
+	 (index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
+    bitsValue := bitsValue bitOr: (1 << (index - 1)).
+]
+
+{ #category : #'bit manipulation' }
+BitField >> toggleBit: index [ 
+	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
+        bitsValue := bitsValue bitXor: (1 << (index - 1)).
+]
+
+{ #category : #'bit manipulation' }
+BitField >> toggleBits: aCollectionOfIndices [
+	
+	aCollectionOfIndices do: [:each | self toggleBit: each ].
+	^ self 
+]
+
+{ #category : #evaluating }
+BitField >> value [
+
+	^ self bitsValue
 ]
