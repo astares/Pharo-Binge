@@ -89,7 +89,8 @@ outputs the manipulated matrix
 010
 000
 000
-000```
+000
+```
 
 
 
