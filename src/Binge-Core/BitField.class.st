@@ -14,9 +14,9 @@ Class {
 { #category : #'instance creation' }
 BitField class >> fromInteger: anInteger [
 
-	^ (self length: (anInteger printStringRadix: 2) size - 2)
-			initialBitsValue: anInteger;
-			yourself
+	^ self
+		  value: anInteger
+		  length: (anInteger printStringRadix: 2) size - 2
 ]
 
 { #category : #'instance creation' }
@@ -43,12 +43,31 @@ BitField class >> length: bitLength [
 ]
 
 { #category : #utilities }
+BitField class >> numberOfBitsToRepresent: anInteger [
+	"Return the number of bits required to represent the given integer"
+
+	anInteger <= 0 ifTrue: [ ^ 0 ].
+	^ (anInteger printStringRadix: 2) size - 2
+]
+
+{ #category : #utilities }
 BitField class >> numberOfBytesRequiredForBits: numberOfBits [
 	"Return the number of bits required to store the given number of bits"
 
 	| numberOfBytes |
 	numberOfBytes := (numberOfBits / 8) roundUpTo: 1.
 	^ numberOfBytes
+]
+
+{ #category : #'instance creation' }
+BitField class >> value: initialValue length: initialBitLength [
+
+	initialBitLength < (self numberOfBitsToRepresent: initialValue)
+		ifTrue: [ self error: 'More bits required to represent this value' ].
+
+	^ (self length: initialBitLength)
+			initialBitsValue: initialValue;
+			yourself
 ]
 
 { #category : #comparing }
@@ -71,6 +90,16 @@ BitField >> bitAt: index [
 	(index between: 1 and: numberOfBits) ifFalse: [
 		^ self error: 'Invalid bit index' ].
 	^ (bitsValue bitShift: 1 - index) bitAnd: 1
+]
+
+{ #category : #accessing }
+BitField >> bits [
+	|coll|
+	coll := OrderedCollection new.
+	1 to: numberOfBits do: [:each |
+		coll add: (Bit value: (self bitAt: each) atPosition: each	)
+	].
+	^ coll
 ]
 
 { #category : #'private - accessing' }
@@ -161,6 +190,12 @@ BitField >> numberOfBytesRequired [
 BitField >> printOn: aStream [
 
 	aStream nextPutAll: (bitsValue printPaddedWith: $0 to: numberOfBits base: 2)
+]
+
+{ #category : #converting }
+BitField >> readStream [
+
+	^ self printString readStream
 ]
 
 { #category : #'bit manipulation' }

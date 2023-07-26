@@ -24,10 +24,16 @@ Integer >> bit [
 ]
 
 { #category : #'*Binge-Core' }
-Integer >> bits [
+Integer >> disabledBits [
 
-	self < 0 ifTrue: [ self error: 'Please only create positive number of bits' ].
+	self <= 0 ifTrue: [ self error: 'Please provide a positive number of bits' ].
 	^ BitField length: self
+]
+
+{ #category : #'*Binge-Core' }
+Integer >> enabledBits [
+
+	^ self disabledBits invert
 ]
 
 { #category : #'*Binge-Core' }

@@ -27,7 +27,7 @@ BitMatrix class >> ofSize: aPoint [
 
 	|rows|
 	rows := OrderedCollection new.
-	aPoint y timesRepeat: [ rows add: aPoint x bits ].
+	aPoint y timesRepeat: [ rows add: aPoint x disabledBits ].
 	^ self fromBitFields: rows
 ]
 

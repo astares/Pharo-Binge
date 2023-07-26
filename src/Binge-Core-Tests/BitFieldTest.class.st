@@ -23,44 +23,55 @@ BitFieldTest >> testAsNumber [
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testClearBit [
 
-	 self assert: (4 bits invert clearBit: 2) printString equals: '1101'
+	 self assert: (2r1111 asBitField clearBit: 2) printString equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testClearBits [
 
-	 self assert: (5 bits invert clearBits: #(1 3)) printString equals: '11010'
+	 self assert: (2r11111 asBitField clearBits: #(1 3)) printString equals: '11010'
 ]
 
 { #category : #'tests - comparision' }
 BitFieldTest >> testEqual [
 
-	self deny: 32 bits equals: 32.
+	self deny: 16 asBitField equals: 15 asBitField.
 
-	self assert: 32 bits equals: 32 bits.
-
-	self deny: 32 bits equals: 64 bits
+	self assert: 16 asBitField equals: 16 asBitField
 ]
 
 { #category : #'tests - comparision' }
 BitFieldTest >> testHashing [
 
-	self assert: 32 bits hash equals: 32 bits hash
+	self assert: 15 asBitField hash equals: 15 asBitField hash
 ]
 
 { #category : #'tests - printing' }
 BitFieldTest >> testInitialPrintString [
 
-	self assert: 32 bits printString size equals: 32.
-	self assert: 32 bits printString equals: '00000000000000000000000000000000'.
+	self assert: 32 disabledBits printString size equals: 32.
+	self assert: 32 disabledBits printString equals: '00000000000000000000000000000000'.
 
-	self assert: 2 bits printString equals: '00'
+	self assert: 2 disabledBits printString equals: '00'
+]
+
+{ #category : #'tests - instance creation' }
+BitFieldTest >> testInstanceCreationFailingDueToNotEnoughBits [
+
+	self should: [ BitField value: 4 length: 1 ] raise: Error
 ]
 
 { #category : #'tests - instance creation' }
 BitFieldTest >> testInstanceCreationFromInteger [
 
-	self assert: 32 bits isBitField
+	"We want a bit field with 32 as the initial bit pattern - '100000'"
+	self assert: 32 asBitField isBitField.
+
+	"We want a mapped bit field of a specific size - '00000000000000000000000000000000'"
+	self assert: 32 disabledBits isBitField.
+
+	"We want a mapped bit field of a specific size - '11111111111111111111111111111111'"
+	self assert: 32 enabledBits isBitField
 ]
 
 { #category : #'tests - instance creation' }
@@ -102,42 +113,40 @@ BitFieldTest >> testNextPowerOfTwo [
 BitFieldTest >> testNumberOfBits [
 
 	self
-		assert: 0 bits numberOfBits equals: 0;
-		assert: 4 bits numberOfBits equals: 4;
-		assert: 42 bits numberOfBits equals: 42
+		assert: 4 disabledBits numberOfBits equals: 4;
+		assert: 42 disabledBits numberOfBits equals: 42
 ]
 
 { #category : #'tests - accessing' }
 BitFieldTest >> testNumberOfBytesRequired [
 
 	self
-		assert: 0 bits numberOfBytesRequired equals: 0;
-		assert: 4 bits numberOfBytesRequired equals: 1;
-		assert: 8 bits numberOfBytesRequired equals: 1;
-		assert: 9 bits numberOfBytesRequired equals: 2;
-		assert: 32 bits numberOfBytesRequired equals: 4
+		assert: 4 disabledBits numberOfBytesRequired equals: 1;
+		assert: 8 disabledBits numberOfBytesRequired equals: 1;
+		assert: 9 disabledBits numberOfBytesRequired equals: 2;
+		assert: 32 disabledBits numberOfBytesRequired equals: 4
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testSetBit [
 
-	 self assert: (4 bits setBit: 2) printString equals: '0010'
+	 self assert: (4 disabledBits setBit: 2) printString equals: '0010'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testSetBits [
 
-	self assert: (5 bits setBits: #( 1 3 )) printString equals: '00101'
+	self assert: (5 disabledBits setBits: #( 1 3 )) printString equals: '00101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBit [
 
-	self assert: (4 bits toggleBit: 2) printString equals: '0010'
+	self assert: (2r1111 asBitField toggleBit: 2) printString equals: '1101'
 ]
 
 { #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBits [
 
-	self assert: (8 bits toggleBits: #(1 2 7)) printString equals: '01000011'
+	self assert: (2r11111111 asBitField toggleBits: #(1 2 7)) printString equals: '10111100'
 ]
