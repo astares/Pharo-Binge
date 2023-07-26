@@ -78,9 +78,7 @@ BitField >> initialize [
 { #category : #operating }
 BitField >> invert [
 
-	1 to: numberOfBits do: [:index |
-		self toggleBit: index
-		]
+	1 to: numberOfBits do: [ :index | self toggleBit: index ]
 ]
 
 { #category : #testing }
@@ -114,22 +112,26 @@ BitField >> printOn: aStream [
 ]
 
 { #category : #'bit manipulation' }
-BitField >> setBit: index [ 
-	 (index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
-    bitsValue := bitsValue bitOr: (1 << (index - 1)).
+BitField >> setBit: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [
+		^ self error: 'Invalid bit index' ].
+	bitsValue := bitsValue bitOr: 1 << (index - 1)
 ]
 
 { #category : #'bit manipulation' }
-BitField >> toggleBit: index [ 
-	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
-        bitsValue := bitsValue bitXor: (1 << (index - 1)).
+BitField >> toggleBit: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [
+		^ self error: 'Invalid bit index' ].
+	bitsValue := bitsValue bitXor: 1 << (index - 1)
 ]
 
 { #category : #'bit manipulation' }
 BitField >> toggleBits: aCollectionOfIndices [
-	
-	aCollectionOfIndices do: [:each | self toggleBit: each ].
-	^ self 
+
+	aCollectionOfIndices do: [ :each | self toggleBit: each ].
+	^ self
 ]
 
 { #category : #evaluating }
