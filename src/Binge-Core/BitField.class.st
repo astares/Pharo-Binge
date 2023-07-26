@@ -50,6 +50,10 @@ BitField >> asNumber [
 	^ self bitsValue
 ]
 
+{ #category : #'bit access' }
+BitField >> bitAt: aPosition [
+]
+
 { #category : #'private - accessing' }
 BitField >> bitsValue [
 
@@ -60,6 +64,28 @@ BitField >> bitsValue [
 BitField >> bitsValue: aValue [
 
 	bitsValue := aValue
+]
+
+{ #category : #'bit manipulation' }
+BitField >> clearBit: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [^ self error: 'Invalid bit index'].
+   (self getBit: index) = 0 ifFalse: [ self toggleBit: index ]
+]
+
+{ #category : #'bit manipulation' }
+BitField >> clearBits: aCollectionOfIndices [
+
+	aCollectionOfIndices do: [ :each | self clearBit: each ].
+	^ self
+]
+
+{ #category : #'bit access' }
+BitField >> getBit: index [
+
+	(index between: 1 and: numberOfBits) ifFalse: [
+		^ self error: 'Invalid bit index' ].
+	^ (bitsValue bitShift: 1 - index) bitAnd: 1
 ]
 
 { #category : #comparing }
@@ -117,6 +143,13 @@ BitField >> setBit: index [
 	(index between: 1 and: numberOfBits) ifFalse: [
 		^ self error: 'Invalid bit index' ].
 	bitsValue := bitsValue bitOr: 1 << (index - 1)
+]
+
+{ #category : #'bit manipulation' }
+BitField >> setBits: aCollectionOfIndices [
+
+	aCollectionOfIndices do: [ :each | self setBit: each ].
+	^ self
 ]
 
 { #category : #'bit manipulation' }

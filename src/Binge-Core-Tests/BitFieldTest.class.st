@@ -20,6 +20,18 @@ BitFieldTest >> testAsNumber [
 	self assert: 42 asBitField asNumber equals: 42
 ]
 
+{ #category : #'tests - bit manipulation' }
+BitFieldTest >> testClearBit [
+
+	 self assert: (4 bits invert clearBit: 2) printString equals: '1101'
+]
+
+{ #category : #'tests - bit manipulation' }
+BitFieldTest >> testClearBits [
+
+	 self assert: (5 bits invert clearBits: #(1 3)) printString equals: '11010'
+]
+
 { #category : #'tests - comparision' }
 BitFieldTest >> testEqual [
 
@@ -94,9 +106,19 @@ BitFieldTest >> testSetBit [
 ]
 
 { #category : #'tests - bit manipulation' }
+BitFieldTest >> testSetBits [
+
+	self assert: (5 bits setBits: #( 1 3 )) printString equals: '00101'
+]
+
+{ #category : #'tests - bit manipulation' }
 BitFieldTest >> testToggleBit [
 
-	self assert: (4 bits toggleBit: 2) printString equals: '0010'.
+	self assert: (4 bits toggleBit: 2) printString equals: '0010'
+]
+
+{ #category : #'tests - bit manipulation' }
+BitFieldTest >> testToggleBits [
 
 	self assert: (8 bits toggleBits: #(1 2 7)) printString equals: '01000011'
 ]
