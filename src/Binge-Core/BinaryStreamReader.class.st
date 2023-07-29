@@ -25,15 +25,17 @@ BinaryStreamReader >> close [
 	stream close
 ]
 
-{ #category : #'reading - little endian' }
+{ #category : #'reading - big endian' }
 BinaryStreamReader >> readBigEndianInteger: numberOfBytes [
-    | byteArray n |
+    | byteArray n maxNegValue |
     byteArray := stream next: numberOfBytes.
     n := 0.
     1 to: numberOfBytes do: [:i |
         n := (n bitShift: 8) + (byteArray at: i)].
     (byteArray at: 1) >= 128
-        ifTrue: [ n := -16r100000000 + n ].
+        ifTrue: [ 
+				maxNegValue := 1 << (8 * numberOfBytes - 1).
+				n := n - maxNegValue ].
     ^ n
 ]
 
@@ -46,13 +48,14 @@ BinaryStreamReader >> readByte [
 
 { #category : #'reading - little endian' }
 BinaryStreamReader >> readLittleEndianInteger: numberOfBytes [
-    | byteArray n |
+    | byteArray n maxNegValue |
     byteArray := stream next: numberOfBytes.
     n := 0.
     numberOfBytes to: 1 by: -1 do: [:i |
         n := (n bitShift: 8) + (byteArray at: i)].
     (byteArray at: numberOfBytes) >= 128
-        ifTrue: [ n := -16r100000000 + n ].
+        ifTrue: [ maxNegValue := 1 << (8 * numberOfBytes - 1).
+				n := maxNegValue negated + n ].
     ^ n
 ]
 
